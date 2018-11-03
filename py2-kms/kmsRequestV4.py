@@ -1,10 +1,14 @@
+#!/usr/bin/env python
+
 import binascii
 import struct
 import time
+import logging
+
 from kmsBase import kmsBase
 from structure import Structure
 from aes import AES
-import logging
+from formatText import shell_message, justify
 
 # v4 AES Key
 key = bytearray([0x05, 0x3D, 0x83, 0x07, 0xF9, 0xE5, 0xF0, 0x88, 0xEB, 0x5E, 0xA6, 0x68, 0x6C, 0xF0, 0x37, 0xC7, 0xE4, 0xEF, 0xD2, 0xD6])
@@ -92,8 +96,10 @@ class kmsRequestV4(kmsBase):
 		response['response'] = responseBuffer
 		response['hash'] = hash
 		response['padding'] = self.getResponsePadding(bodyLength)
-                logging.debug("KMS V4 Response: %s" % response.dump())
-                logging.debug("KMS V4 Response Bytes: %s" % binascii.b2a_hex(str(response)))
+		
+		shell_message(nshell = 16)                
+                logging.debug("KMS V4 Response: %s" % justify(response.dump(print_to_stdout = False)))
+                logging.debug("KMS V4 Response Bytes: %s" % justify(binascii.b2a_hex(str(response))))
 			
 		return str(response)
 
@@ -111,7 +117,9 @@ class kmsRequestV4(kmsBase):
 		request['request'] = requestBase
 		request['hash'] = hash
 		request['padding'] = self.getResponsePadding(bodyLength)
-                logging.debug("Request V4 Data: %s" % request.dump())
-                logging.debug("Request V4: %s" % binascii.b2a_hex(str(request)))
+		
+		shell_message(nshell = 10)                
+                logging.debug("Request V4 Data: %s" % justify(request.dump(print_to_stdout = False)))
+                logging.debug("Request V4: %s" % justify(binascii.b2a_hex(str(request))))
                         
 		return request

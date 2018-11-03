@@ -1,5 +1,5 @@
-#!/usr/bin/python
-#
+#!/usr/bin/env python
+
 # Copyright 2009 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,8 @@
 # pylint: disable-msg=C6409,W0212
 
 """
-Stripped down version of `python-datetime-tz` that only contains the "find local
-timezone" bits.
+Stripped down version of `python-datetime-tz`
+that only contains the "find local timezone" bits.
 """
 
 import datetime
